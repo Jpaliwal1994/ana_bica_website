@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ana Bica | Life Coach & Public Speaker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ivory:     #F7F3EE;
+      --cream:     #EFE9E0;
+      --green:     #3B5145;
+      --green-lt:  #506B5A;
+      --terra:     #B87B5A;
+      --terra-lt:  #D4A07A;
+      --charcoal:  #2C2C2C;
+      --mid:       #6B6B6B;
+      --serif:     'Cormorant Garamond', Georgia, serif;
+      --sans:      'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 4vw;
+      background: rgba(247, 243, 238, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(59, 81, 69, 0.1);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.07); }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--terra); font-style: italic; }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--terra); }
+
+    .nav-cta {
+      background: var(--green);
+      color: #fff !important;
+      padding: 0.55rem 1.3rem;
+      border-radius: 2px;
+    }
+    .nav-cta:hover { background: var(--green-lt); color: #fff !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+
+    .hero-text {
+      padding: 6vw 4vw 6vw 8vw;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease 0.3s forwards;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1.6rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--terra);
+    }
+
+    .hero-heading {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--green);
+      margin-bottom: 1.8rem;
+    }
+    .hero-heading em {
+      font-style: italic;
+      color: var(--terra);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--mid);
+      max-width: 420px;
+      line-height: 1.8;
+      margin-bottom: 2.8rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: #fff;
+      border: 1.5px solid var(--green);
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--green);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--green);
+      border: 1.5px solid var(--green);
+    }
+    .btn-secondary:hover {
+      background: var(--green);
+      color: #fff;
+    }
+
+    /* ── HERO IMAGE ── */
+    .hero-image-wrap {
+      position: relative;
+      height: 100vh;
+      opacity: 0;
+      animation: fadeIn 1.2s ease 0.6s forwards;
+    }
+
+    .hero-image-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--cream);
+      clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    /* Decorative circle */
+    .hero-deco-circle {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      border: 1px solid rgba(184, 123, 90, 0.25);
+      bottom: 12%;
+      right: 8%;
+      z-index: 1;
+    }
+
+    .hero-img {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-45%);
+      height: 92%;
+      object-fit: contain;
+      object-position: top center;
+      z-index: 2;
+    }
+
+    /* Floating badge */
+    .hero-badge {
+      position: absolute;
+      bottom: 14%;
+      left: 4%;
+      z-index: 3;
+      background: #fff;
+      border-left: 3px solid var(--terra);
+      padding: 1rem 1.3rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      min-width: 180px;
+    }
+    .hero-badge p {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--green);
+      line-height: 1.2;
+    }
+    .hero-badge span {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 7rem 8vw; }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1rem;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--terra);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--green);
+    }
+    .section-title em { font-style: italic; color: var(--terra); }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      background: var(--green);
+      padding: 5rem 8vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5vw;
+      align-items: center;
+    }
+
+    .about-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.5;
+      border-left: 3px solid var(--terra);
+      padding-left: 1.8rem;
+    }
+
+    .about-body { color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.9; }
+    .about-body strong { color: #fff; font-weight: 500; }
+
+    .about-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.6rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terra-lt);
+      text-decoration: none;
+      transition: gap 0.3s;
+    }
+    .about-link:hover { gap: 0.9rem; }
+    .about-link::after { content: '→'; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--ivory); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+
+    .service-card {
+      background: var(--cream);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--terra);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .service-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 0.5rem;
+    }
+    .service-name {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--green);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(59,81,69,0.25);
+      color: var(--green-lt);
+      padding: 0.25rem 0.65rem;
+      border-radius: 1px;
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonials {
+      background: var(--cream);
+      text-align: center;
+    }
+    .testimonials .section-title { margin-bottom: 3.5rem; }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      text-align: left;
+    }
+    .testimonial-card {
+      background: #fff;
+      padding: 2rem;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: var(--serif);
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--terra-lt);
+      opacity: 0.5;
+      position: absolute;
+      top: 0.8rem;
+      left: 1.5rem;
+    }
+    .testimonial-text {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.7;
+      margin-bottom: 1.3rem;
+      padding-top: 1.5rem;
+    }
+    .testimonial-author {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .testimonial-author span {
+      display: block;
+      color: var(--terra);
+      margin-top: 0.2rem;
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--terra);
+      padding: 5rem 8vw;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+    .cta-band-text {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .cta-band-text em { font-style: italic; }
+    .btn-white {
+      background: #fff;
+      color: var(--terra);
+      border: 1.5px solid #fff;
+      white-space: nowrap;
+    }
+    .btn-white:hover {
+      background: transparent;
+      color: #fff;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 3rem 8vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--terra-lt); font-style: italic; }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--terra-lt); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text { padding: 6rem 6vw 3rem; }
+      .hero-image-wrap { height: 60vw; }
+      .hero-img { height: 90%; }
+      .hero-image-bg { clip-path: none; }
+      .about-strip, .cta-band { grid-template-columns: 1fr; }
+      .services-grid, .testimonial-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Ana <span>Bica</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#speaking">Speaking</a></li>
+      <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Life Coach &amp; Public Speaker</div>
+      <h1 class="hero-heading">
+        You don't have to<br/>
+        carry this<br/>
+        <em>alone.</em>
+      </h1>
+      <p class="hero-sub">
+        Ana Bica turned her own journey through burnout, depression, and anxiety into a mission — to help individuals and organisations build healthier, more resilient lives.
+      </p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn btn-primary">Work With Me</a>
+        <a href="#about" class="btn btn-secondary">My Story</a>
+      </div>
+    </div>
+
+    <div class="hero-image-wrap">
+      <div class="hero-image-bg"></div>
+      <div class="hero-deco-circle"></div>
+      <img class="hero-img" src="Ana_Bica_Website.JPG" alt="Ana Bica — Life Coach and Public Speaker" />
+      <div class="hero-badge">
+        <p>Dublin,<br/>Ireland</p>
+        <span>Available Worldwide</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT STRIP -->
+  <div class="about-strip" id="about">
+    <blockquote class="about-quote reveal">
+      "I've been where you are. And I know there is a way through."
+    </blockquote>
+    <div class="about-body reveal reveal-delay-1">
+      <p>
+        Ana spent years as a dedicated nurse, quietly carrying the weight of workplace burnout, PTSD, and anxiety — until the day she chose herself. That turning point became the foundation of everything she now does.
+      </p>
+      <br/>
+      <p>
+        Today, Ana is a <strong>certified life coach and sought-after speaker</strong> who brings raw honesty and evidence-informed tools to her work. She helps individuals reclaim their wellbeing and guides organisations in creating cultures where people genuinely thrive.
+      </p>
+      <a href="about.html" class="about-link">Read Ana's full story</a>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="reveal">
+      <div class="section-eyebrow">How I Can Help</div>
+      <h2 class="section-title">Services designed<br/>for <em>real change</em></h2>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">🌿</div>
+        <div class="service-label">For Individuals</div>
+        <div class="service-name">1:1 Life Coaching</div>
+        <p class="service-desc">
+          Private coaching sessions tailored to where you are right now. Whether you're navigating burnout, anxiety, a career crossroads, or simply feeling lost — we work through it together.
+        </p>
+        <div class="service-tags">
+          <span class="tag">Burnout</span>
+          <span class="tag">Anxiety</span>
+          <span class="tag">Career</span>
+          <span class="tag">Wellbeing</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">🦋</div>
+        <div class="service-label">For Individuals</div>
+        <div class="service-name">Discovery Call</div>
+        <p class="service-desc">
+          Not sure if coaching is right for you? Start with a free 30-minute call. No pressure, no commitment — just an honest conversation about where you are and where you want to be.
+        </p>
+        <div class="service-tags">
+          <span class="tag">Free</span>
+          <span class="tag">30 Minutes</span>
+          <span class="tag">Online</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">🎤</div>
+        <div class="service-label">For Organisations</div>
+        <div class="service-name">Speaking &amp; Webinars</div>
+        <p class="service-desc">
+          Ana brings her story and expertise to workplaces, conferences, and events — opening up honest conversations about mental health, burnout prevention, and building resilient teams.
+        </p>
+        <div class="service-tags">
+          <span class="tag">Mental Health</span>
+          <span class="tag">Wellbeing</span>
+          <span class="tag">Webinars</span>
+          <span class="tag">Events</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="reveal">
+      <div class="section-eyebrow">Voices of Change</div>
+      <h2 class="section-title">What people are <em>saying</em></h2>
+    </div>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card reveal reveal-delay-1">
+        <p class="testimonial-text">Working with Ana helped me recognise patterns I'd been carrying for years. For the first time in a long time, I feel like myself again.</p>
+        <div class="testimonial-author">
+          Sarah M.
+          <span>1:1 Coaching Client</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <p class="testimonial-text">Ana spoke at our company wellbeing day and the impact was immediate. People were still talking about it weeks later. Authentic, brave, and deeply practical.</p>
+        <div class="testimonial-author">
+          David K.
+          <span>HR Director, Dublin</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-3">
+        <p class="testimonial-text">I came to Ana in the middle of a burnout I didn't even know I was in. Her approach is gentle but powerful. I finally have tools that actually work for me.</p>
+        <div class="testimonial-author">
+          Claire O'B.
+          <span>1:1 Coaching Client</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band" id="contact">
+    <div class="cta-band-text reveal">
+      Ready to take the <em>first step?</em><br/>
+      It starts with one conversation.
+    </div>
+    <div class="reveal reveal-delay-1">
+      <a href="booking.html" class="btn btn-white">Book a Free Discovery Call</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">Ana <span>Bica</span></a>
+    <ul class="footer-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="speaking.html">Speaking</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 Ana Bica. Dublin, Ireland.</p>
+  </footer>
+
+  <script>
+    // Nav shadow on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
